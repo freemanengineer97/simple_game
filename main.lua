@@ -14,25 +14,36 @@ end
 function love.update(dt)
   p_m.move(a.player)
   f_m.move(a.followers)
-  h.handler()
+  h.dmg(a, hazards)
 end
 
 
 function love.draw()
+  -- hazards
+  for i, hazard_list in pairs(hazards) do 
+    for j, hazard in pairs(hazard_list) do
+      love.graphics.setColor(unpack(hazard.color))
+      love.graphics.rectangle("fill", hazard.x, hazard.y, hazard.w, hazard.h)
+    end
+  end
+  -- followers
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.circle("fill", player.x, player.y, 20)
-  love.graphics.print("HP:", player.x - 30, player.y - 40)
-  love.graphics.print(string.format("%.1f", player.hp), player.x - 10, player.y - 40)
-  love.graphics.setColor(0, 0, 0, 1)
-  love.graphics.print("P", player.x - 5, player.y - 5)
-  love.graphics.setColor(1, 1, 1, 1)
-
-  for i, follower in pairs(followers) do 
+  for i, follower in pairs(a.followers) do 
     love.graphics.circle("fill", follower.x, follower.y, 10)
     love.graphics.print("HP:", follower.x - 25, follower.y - 30)
     love.graphics.print(string.format("%.1f", follower.hp), follower.x - 5, follower.y - 30)
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.print(tostring(i), follower.x - 5, follower.y - 5)
+    love.graphics.setColor(1, 1, 1, 1)
   end
 
+  -- player
+  love.graphics.circle("fill", a.player.x, a.player.y, 20)
+  love.graphics.print("HP:", a.player.x - 30, a.player.y - 40)
+  love.graphics.print(string.format("%.1f", a.player.hp), a.player.x - 10, a.player.y - 40)
+  love.graphics.setColor(0, 0, 0, 1)
+  love.graphics.print("P", a.player.x - 5, a.player.y - 5)
+  love.graphics.setColor(1, 1, 1, 1)
   -- love.graphics.print(distance, 0, 10)
 
 end

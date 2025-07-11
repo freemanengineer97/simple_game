@@ -1,4 +1,5 @@
 local c__units = require("classes.units")
+local c__hazards = require("classes.hazards")
 
 m = {}
 
@@ -32,15 +33,16 @@ function m.init()
 
 
   a = { player = player, followers = followers }
-
-  m.hazards = {
-    {
-      x = 600,
-      y = 600,
-      w = 200,
-      h = 200,
-      dpt = 0.1
-    }
+  
+  hazards = {
+    lava_list = {
+      c__hazards.Lava:init{
+        x = 800, 
+        y = 600,
+        w = 200,
+        h = 100
+      }
+    } 
   }
 
   return { a, hazards }
