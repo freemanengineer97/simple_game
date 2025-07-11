@@ -26,6 +26,8 @@ end
 function Player:init(o)
   o.type = "player"
   o.hp = 100
+  o.v = { x = 0, y = 0 }
+  o.max_v = 5
   return Unit:init(o)
 end
 

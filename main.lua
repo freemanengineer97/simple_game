@@ -19,18 +19,26 @@ end
 
 
 function love.draw()
+  love.graphics.setColor(1, 1, 1, 1)
   love.graphics.circle("fill", player.x, player.y, 20)
-  for i, follower in pairs(followers) do
+  love.graphics.print("HP:", player.x - 30, player.y - 40)
+  love.graphics.print(string.format("%.1f", player.hp), player.x - 10, player.y - 40)
+  love.graphics.setColor(0, 0, 0, 1)
+  love.graphics.print("P", player.x - 5, player.y - 5)
+  love.graphics.setColor(1, 1, 1, 1)
+
+  for i, follower in pairs(followers) do 
     love.graphics.circle("fill", follower.x, follower.y, 10)
+    love.graphics.print("HP:", follower.x - 25, follower.y - 30)
+    love.graphics.print(string.format("%.1f", follower.hp), follower.x - 5, follower.y - 30)
   end
-  
-  -- love.graphics.print("Distance to Follower", 0, 0)
+
   -- love.graphics.print(distance, 0, 10)
 
 end
 
 function love.keypressed(key)
   if key==k.util_key.add_follower then 
-    u_a.add_follower()
+    u_a.add_follower(a.followers, a.player)
   end
 end

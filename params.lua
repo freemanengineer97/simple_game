@@ -1,4 +1,4 @@
 return {
-  velocity = 5,
+  speed = 5,
   diag_mult = 0.707
 }

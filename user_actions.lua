@@ -1,18 +1,29 @@
+c__units = require("classes.units")
+
 m = {}
 
-function m.add_follower(followers)
-  i = 1
-  while true do
-    if followers[i] == nil then
-      followers[i] = {
-        parent_id = num_followers - 1,
-        x = followers[num_followers - 1].x,
-        y = followers[num_followers - 1].y,
-        v = { x = 0, y = 0 }
-      }
-      break
+function m.add_follower(followers, player)
+  max_follower = nil
+  max_id = 0
+  for i, follower in pairs(followers) do
+    if i > max_id then
+      max_id = i
+      max_follower = follower
     end
-    i = i + 1
+  end
+  if max_id > 0 then
+    table.insert(followers, c__units.Follower:init{
+      parent_id = max_id,
+      x = max_follower.x,
+      y = max_follower.y,
+    })
+  else -- no followers, use player as parent
+    table.insert(followers, c__units.Follower:init{
+      parent_id = 0,
+      x = player.x,
+      y = player.y,
+    })
+
   end
 end
 

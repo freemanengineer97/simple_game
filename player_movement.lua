@@ -7,18 +7,19 @@ function resolve_keys()
   move_vector = { x = 0, y = 0 }
     
   if love.keyboard.isDown(k.move_key.up) then
-    move_vector.y = move_vector.y - p.velocity
+    move_vector.y = move_vector.y - p.speed
   end
   if love.keyboard.isDown(k.move_key.down) then
-    move_vector.y = move_vector.y + p.velocity
+    move_vector.y = move_vector.y + p.speed
   end
   if love.keyboard.isDown(k.move_key.left) then
-    move_vector.x = move_vector.x - p.velocity
+    move_vector.x = move_vector.x - p.speed
   end
   if love.keyboard.isDown(k.move_key.right) then
-    move_vector.x = move_vector.x + p.velocity
+    move_vector.x = move_vector.x + p.speed
   end
 
+  -- print("player move_vector:\n\tx: " .. tostring(move_vector.x) .. "\n\ty: " .. tostring(move_vector.y))
   -- if moving diagonally, apply penalty
   if math.abs(move_vector.x) > 0 and math.abs(move_vector.y) > 0 then
     move_vector.x = move_vector.x * p.diag_mult

@@ -2,10 +2,10 @@
 local m = {}
 
 m.move_key = { 
-  up = "up",
-  down = "down",
-  right = "right",
-  left = "left"
+  up = "w",
+  down = "s",
+  right = "d",
+  left = "a"
 }
 
 m.util_key = {
