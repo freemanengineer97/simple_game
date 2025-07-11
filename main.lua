@@ -5,6 +5,8 @@ local k = require("keys")
 local u_a = require("user_actions")
 local s_c = require("stage_configs.0_2") -- TODO: parameterize
 local h = require("hazards")
+local u = require("util")
+
 
 function love.load()
   a, hazards = unpack(s_c.init())
@@ -15,6 +17,9 @@ function love.update(dt)
   p_m.move(a.player)
   f_m.move(a.followers)
   h.dmg(a, hazards)
+
+  -- keep at end
+  u.check_hp(a)
 end
 
 
