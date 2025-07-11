@@ -3,14 +3,6 @@ local k = require("keys")
 
 local m = {}
 
-function m.move()
-  if input_mode == "keyboard" then
-    move_vector = resolve_keys()
-    player.x = player.x + move_vector.x
-    player.y = player.y + move_vector.y
-  end
-end
-
 function resolve_keys()
   move_vector = { x = 0, y = 0 }
     
@@ -34,6 +26,14 @@ function resolve_keys()
   end
 
   return move_vector
+end
+
+
+function m.move(player)
+  if input_mode == "keyboard" then
+    move_vector = resolve_keys()
+    player:move(move_vector.x, move_vector.y)
+  end
 end
 
 return m

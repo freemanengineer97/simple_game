@@ -97,9 +97,12 @@ function intuition (follower, player)
 end
 
 function m.move(followers)
+  -- for i, follower in pairs(allies.followers) do
+  --   print(follower.x)
+  -- end
   for i, follower in pairs(followers) do
-    
     local move_vector = { x = 0, y = 0 }
+
     if follower.parent_id == 0 then
       move_vector = follow_parent(follower, player, desired_distance_player)
     else 
@@ -115,8 +118,7 @@ function m.move(followers)
       x = move_vector.x + move_vector_fomo.x,
       y = move_vector.y + move_vector_fomo.y
     }
-    follower.x = follower.x + move_vector.x
-    follower.y = follower.y + move_vector.y
+    follower:move(move_vector.x, move_vector.y)
   end
 end
 

@@ -1,3 +1,5 @@
+local c__units = require("classes.units")
+
 m = {}
 
 local num_followers = 3
@@ -5,22 +7,18 @@ local init_loc_player = { x = 500, y = 250 }
 local init_follower_displacement_vector = { x = -10, y = -10 }
 
 function m.init()
-  player = { 
-    hp = 100,
-    x = init_loc_player.x,
-    y = init_loc_player.y
-  }
+  player = c__units.player.init(init_loc_player.x, init_loc_player.y)
 
   followers = {}
   for i=1,num_followers do
-    followers[i] = {
-      hp = 10,
-      parent_id = i-1,
-      x = init_loc_player.x + (init_follower_displacement_vector.x * i),
-      y = init_loc_player.y + (init_follower_displacement_vector.y * i),
-      v = { x = 0, y = 0 }
-    }
+    followers[i] = c__units.follower.init(
+      init_loc_player.x + (init_follower_displacement_vector.x * i),
+      init_loc_player.y + (init_follower_displacement_vector.y * i),
+      { x = 0, y = 0 }
+    )
   end
+
+  a = { player = player, followers = followers }
 
   m.hazards = {
     {
@@ -32,7 +30,7 @@ function m.init()
     }
   }
 
-  return { player, followers, hazards }
+  return { a, hazards }
 end
 
 return m

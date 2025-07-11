@@ -2,20 +2,18 @@
 local p_m = require("player_movement")
 local f_m = require("follower_movement")
 local k = require("keys")
-local e = require("events")
-local s_c = require("stage_configs.0_1") -- TODO: parameterize
+local u_a = require("user_actions")
+local s_c = require("stage_configs.0_2") -- TODO: parameterize
 local h = require("hazards")
 
--- player is a_unit[0]
-
 function love.load()
-  player, followers, hazards = unpack(s_c.init())
+  a, hazards = unpack(s_c.init())
   input_mode = "keyboard" -- TODO: parameterize when working on control scheme
 end
 
 function love.update(dt)
-  p_m.move(player)
-  f_m.move(followers)
+  p_m.move(a.player)
+  f_m.move(a.followers)
   h.handler()
 end
 
@@ -33,6 +31,6 @@ end
 
 function love.keypressed(key)
   if key==k.util_key.add_follower then 
-    e.add_follower()
+    u_a.add_follower()
   end
 end
